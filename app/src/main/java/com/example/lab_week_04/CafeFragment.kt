@@ -9,6 +9,18 @@ import com.google.android.material.tabs.TabLayoutMediator
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 
+
+val CAFE_TITLES = listOf(
+    R.string.starbucks_title,
+    R.string.janjijiwa_title,
+    R.string.kopikenangan_title,
+)
+
+val CAFE_DESCRIPTIONS = listOf(
+    R.string.starbucks_desc,
+    R.string.janjijiwa_desc,
+    R.string.kopikenangan_desc,
+)
 class CafeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,10 +37,15 @@ class CafeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val viewPager = view.findViewById<ViewPager2>(R.id.view_pager)
         val tabLayout = view.findViewById<TabLayout>(R.id.tab_layout)
-        val adapter = CafeAdapter(childFragmentManager, lifecycle)
+
+        val cafeDescriptions = CAFE_DESCRIPTIONS.map { description ->
+            resources.getString(description)
+        }
+
+        val adapter = CafeAdapter(childFragmentManager, lifecycle, cafeDescriptions)
         viewPager.adapter = adapter
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.text = resources.getString(TABS_FIXED[position])
+            tab.text = resources.getString(CAFE_TITLES[position])
         }.attach()
     }
 }

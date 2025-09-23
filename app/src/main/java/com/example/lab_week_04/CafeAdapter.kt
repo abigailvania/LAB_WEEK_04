@@ -11,12 +11,12 @@ val TABS_FIXED = listOf (
     R.string.kopikenangan_title,
 )
 
-class CafeAdapter (fragmentManager: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fragmentManager, lifecycle) {
+class CafeAdapter (fragmentManager: FragmentManager, lifecycle: Lifecycle, private val descriptions: List<String>) : FragmentStateAdapter(fragmentManager, lifecycle) {
     override fun getItemCount(): Int {
-        return TABS_FIXED.size
+        return descriptions.size;
     }
 
     override fun createFragment(position: Int): Fragment {
-        return CafeDetailFragment()
+        return CafeDetailFragment.newInstance(descriptions[position])
     }
 }
